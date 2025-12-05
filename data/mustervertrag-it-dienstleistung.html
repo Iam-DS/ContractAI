@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>IT-Dienstleistungsvertrag - DV-2024-001</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #1a1a1a;
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 2cm;
+            background: white;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.3cm;
+            letter-spacing: 2px;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 12pt;
+            font-weight: normal;
+            margin-top: 0;
+            color: #444;
+        }
+        
+        .header-info {
+            text-align: center;
+            margin: 1cm 0;
+            padding: 0.5cm;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+        }
+        
+        .parties {
+            display: flex;
+            justify-content: space-between;
+            margin: 1cm 0;
+            gap: 2cm;
+        }
+        
+        .party {
+            flex: 1;
+            padding: 0.5cm;
+            background: #f9f9f9;
+            border-left: 3px solid #333;
+        }
+        
+        .party h3 {
+            margin: 0 0 0.3cm 0;
+            font-size: 11pt;
+            color: #333;
+        }
+        
+        .party p {
+            margin: 0.1cm 0;
+        }
+        
+        .section {
+            margin: 0.8cm 0;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            font-size: 12pt;
+            margin-bottom: 0.3cm;
+            padding-bottom: 0.2cm;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .subsection {
+            margin-left: 0.5cm;
+            margin-bottom: 0.3cm;
+        }
+        
+        .indent {
+            margin-left: 1cm;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5cm 0;
+        }
+        
+        table td, table th {
+            padding: 0.2cm 0.4cm;
+            border: 1px solid #ddd;
+        }
+        
+        table th {
+            background: #f5f5f5;
+            text-align: left;
+        }
+        
+        .amount-table {
+            width: auto;
+            margin: 0.3cm 0 0.3cm 0.5cm;
+        }
+        
+        .amount-table td {
+            border: none;
+            padding: 0.1cm 0.5cm;
+        }
+        
+        .amount-table td:last-child {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .total-row td {
+            border-top: 1px solid #333;
+            font-weight: bold;
+        }
+        
+        .signatures {
+            margin-top: 2cm;
+            display: flex;
+            justify-content: space-between;
+            gap: 3cm;
+        }
+        
+        .signature-block {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .signature-line {
+            border-top: 1px solid #333;
+            margin-top: 2cm;
+            padding-top: 0.3cm;
+        }
+        
+        .attachments {
+            margin-top: 1cm;
+            padding: 0.5cm;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        
+        .attachments h4 {
+            margin: 0 0 0.3cm 0;
+        }
+        
+        .attachments ul {
+            margin: 0;
+            padding-left: 1.5cm;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>DIENSTLEISTUNGSVERTRAG</h1>
+<h2>IT-Services und Softwareentwicklung</h2>
+
+<div class="header-info">
+    <strong>Vertragsnummer:</strong> DV-2024-001 &nbsp;&nbsp;|&nbsp;&nbsp;
+    <strong>Datum:</strong> 04. Dezember 2024
+</div>
+
+<div class="parties">
+    <div class="party">
+        <h3>AUFTRAGGEBER</h3>
+        <p><strong>TechSolutions GmbH</strong></p>
+        <p>Musterstraße 42</p>
+        <p>80331 München</p>
+        <p>Vertreten durch: Dr. Thomas Müller (Geschäftsführer)</p>
+        <p>USt-IdNr.: DE123456789</p>
+    </div>
+    <div class="party">
+        <h3>AUFTRAGNEHMER</h3>
+        <p><strong>Digital Experts AG</strong></p>
+        <p>Innovationsweg 15</p>
+        <p>10115 Berlin</p>
+        <p>Vertreten durch: Sarah Schmidt (Vorstand)</p>
+        <p>USt-IdNr.: DE987654321</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 1 VERTRAGSGEGENSTAND</div>
+    <div class="subsection">
+        <p>(1) Der Auftragnehmer erbringt für den Auftraggeber IT-Dienstleistungen im Bereich Softwareentwicklung und Systemintegration.</p>
+        <p>(2) Die Leistungen umfassen im Einzelnen:</p>
+        <div class="indent">
+            <p>a) Entwicklung einer webbasierten Kundenmanagement-Plattform</p>
+            <p>b) Integration bestehender ERP-Systeme (SAP S/4HANA)</p>
+            <p>c) Implementierung von REST-APIs für Drittanbieter</p>
+            <p>d) Schulung der Mitarbeiter (max. 20 Personen)</p>
+            <p>e) Technischer Support während der Einführungsphase</p>
+        </div>
+        <p>(3) Die detaillierte Leistungsbeschreibung ergibt sich aus Anlage 1 (Pflichtenheft) sowie Anlage 2 (Technische Spezifikation).</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 2 VERGÜTUNG</div>
+    <div class="subsection">
+        <p>(1) Die Gesamtvergütung für die vereinbarten Leistungen beträgt:</p>
+        <table class="amount-table">
+            <tr><td>Netto:</td><td>185.000,00 EUR</td></tr>
+            <tr><td>zzgl. 19% MwSt.:</td><td>35.150,00 EUR</td></tr>
+            <tr class="total-row"><td>Brutto:</td><td>220.150,00 EUR</td></tr>
+        </table>
+        
+        <p>(2) Die Vergütung ist wie folgt zahlbar:</p>
+        <div class="indent">
+            <p>• 30% bei Vertragsunterzeichnung (55.545,00 EUR brutto)</p>
+            <p>• 40% nach Abnahme des Prototyps (88.060,00 EUR brutto)</p>
+            <p>• 30% nach Endabnahme (66.045,00 EUR brutto)</p>
+        </div>
+        
+        <p>(3) Zahlungen sind innerhalb von 14 Tagen nach Rechnungsstellung ohne Abzug fällig.</p>
+        
+        <p>(4) Zusätzliche Leistungen werden nach Aufwand berechnet:</p>
+        <table class="amount-table">
+            <tr><td>Senior Developer:</td><td>150,00 EUR/Stunde netto</td></tr>
+            <tr><td>Junior Developer:</td><td>95,00 EUR/Stunde netto</td></tr>
+            <tr><td>Projektmanagement:</td><td>130,00 EUR/Stunde netto</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 3 VERTRAGSLAUFZEIT</div>
+    <div class="subsection">
+        <p>(1) Dieser Vertrag beginnt am <strong>01. Januar 2025</strong>.</p>
+        <p>(2) Die Projektlaufzeit beträgt 12 Monate. Geplantes Projektende: <strong>31. Dezember 2025</strong>.</p>
+        <p>(3) Der Vertrag kann von beiden Parteien mit einer Frist von <strong>3 Monaten zum Monatsende</strong> gekündigt werden.</p>
+        <p>(4) Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt.</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 4 LEISTUNGSERBRINGUNG</div>
+    <div class="subsection">
+        <p>(1) Die Leistungen werden am Sitz des Auftraggebers sowie remote erbracht. Der Auftragnehmer stellt hierfür qualifiziertes Personal zur Verfügung.</p>
+        <p>(2) Der Auftraggeber stellt die erforderliche Infrastruktur (Arbeitsplätze, Zugänge, Testumgebungen) kostenfrei bereit.</p>
+        <p>(3) Beide Parteien benennen jeweils einen Projektleiter als zentralen Ansprechpartner:</p>
+        <div class="indent">
+            <p>• Auftraggeber: Herr Michael Weber</p>
+            <p>• Auftragnehmer: Frau Lisa Hoffmann</p>
+        </div>
+        <p>(4) Es finden wöchentliche Statusmeetings (jeden Dienstag, 10:00 Uhr) sowie monatliche Steering-Committee-Meetings statt.</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 5 ABNAHME</div>
+    <div class="subsection">
+        <p>(1) Die Abnahme erfolgt in zwei Phasen:</p>
+        <div class="indent">
+            <p>a) Teilabnahme des Prototyps bis 30. Juni 2025</p>
+            <p>b) Endabnahme des Gesamtsystems bis 31. Dezember 2025</p>
+        </div>
+        <p>(2) Der Auftraggeber hat Mängel innerhalb von 14 Tagen nach Bereitstellung schriftlich zu rügen.</p>
+        <p>(3) Unwesentliche Mängel berechtigen nicht zur Verweigerung der Abnahme.</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 6 GEWÄHRLEISTUNG</div>
+    <div class="subsection">
+        <p>(1) Der Auftragnehmer gewährleistet, dass die Software den vereinbarten Spezifikationen entspricht.</p>
+        <p>(2) Die Gewährleistungsfrist beträgt <strong>24 Monate</strong> ab Endabnahme.</p>
+        <p>(3) Bei Mängeln hat der Auftragnehmer zunächst das Recht zur Nachbesserung. Die Nachbesserung hat innerhalb von 10 Werktagen zu erfolgen.</p>
+        <p>(4) Schlägt die Nachbesserung zweimal fehl, kann der Auftraggeber Minderung oder Rücktritt verlangen.</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 7 HAFTUNG</div>
+    <div class="subsection">
+        <p>(1) Die Haftung des Auftragnehmers für Schäden ist auf das Dreifache der Gesamtvergütung begrenzt, maximal jedoch auf <strong>500.000,00 EUR</strong>.</p>
+        <p>(2) Diese Haftungsbegrenzung gilt nicht bei:</p>
+        <div class="indent">
+            <p>• Vorsatz oder grober Fahrlässigkeit</p>
+            <p>• Verletzung von Leben, Körper oder Gesundheit</p>
+            <p>• Verletzung wesentlicher Vertragspflichten</p>
+        </div>
+        <p>(3) Für mittelbare Schäden und entgangenen Gewinn haftet der Auftragnehmer nur bei Vorsatz oder grober Fahrlässigkeit.</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 8 GEHEIMHALTUNG UND DATENSCHUTZ</div>
+    <div class="subsection">
+        <p>(1) Beide Parteien verpflichten sich, alle im Rahmen dieses Vertrages erlangten vertraulichen Informationen geheim zu halten.</p>
+        <p>(2) Diese Verpflichtung gilt auch nach Beendigung des Vertrages für einen Zeitraum von <strong>5 Jahren</strong>.</p>
+        <p>(3) Der Auftragnehmer verarbeitet personenbezogene Daten ausschließlich im Auftrag und nach Weisung des Auftraggebers gemäß Art. 28 DSGVO.</p>
+        <p>(4) Eine separate Auftragsverarbeitungsvereinbarung (AVV) ist als Anlage 3 beigefügt.</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 9 NUTZUNGSRECHTE</div>
+    <div class="subsection">
+        <p>(1) Der Auftraggeber erhält mit vollständiger Zahlung ein ausschließliches, zeitlich und räumlich unbeschränktes Nutzungsrecht an den im Rahmen dieses Vertrages erstellten Arbeitsergebnissen.</p>
+        <p>(2) Der Quellcode wird dem Auftraggeber vollständig übergeben und dokumentiert.</p>
+        <p>(3) Vorbestehende Rechte des Auftragnehmers (Libraries, Frameworks) werden dem Auftraggeber als einfaches Nutzungsrecht eingeräumt.</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">§ 10 SCHLUSSBESTIMMUNGEN</div>
+    <div class="subsection">
+        <p>(1) Änderungen und Ergänzungen dieses Vertrages bedürfen der Schriftform. Dies gilt auch für die Aufhebung dieses Schriftformerfordernisses.</p>
+        <p>(2) Sollten einzelne Bestimmungen dieses Vertrages unwirksam sein oder werden, berührt dies die Wirksamkeit der übrigen Bestimmungen nicht.</p>
+        <p>(3) Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.</p>
+        <p>(4) Gerichtsstand für alle Streitigkeiten aus diesem Vertrag ist München.</p>
+    </div>
+</div>
+
+<div class="attachments">
+    <h4>ANLAGEN</h4>
+    <ul>
+        <li>Anlage 1: Pflichtenheft</li>
+        <li>Anlage 2: Technische Spezifikation</li>
+        <li>Anlage 3: Auftragsverarbeitungsvereinbarung (AVV)</li>
+        <li>Anlage 4: Service Level Agreement (SLA)</li>
+    </ul>
+</div>
+
+<div class="signatures">
+    <div class="signature-block">
+        <p>München, den _______________</p>
+        <div class="signature-line">
+            <p>Dr. Thomas Müller<br>
+            Geschäftsführer TechSolutions GmbH<br>
+            <em>(Auftraggeber)</em></p>
+        </div>
+    </div>
+    <div class="signature-block">
+        <p>Berlin, den _______________</p>
+        <div class="signature-line">
+            <p>Sarah Schmidt<br>
+            Vorstand Digital Experts AG<br>
+            <em>(Auftragnehmer)</em></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+

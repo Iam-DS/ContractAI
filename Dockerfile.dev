@@ -1,0 +1,22 @@
+# Development Dockerfile für ContractAI
+FROM node:20-alpine
+
+# Arbeitsverzeichnis setzen
+WORKDIR /app
+
+# Package files kopieren
+COPY package*.json ./
+
+# Dependencies installieren (ohne Cache für saubere Installation)
+RUN npm install --no-cache
+
+# Source Code wird via Volume gemountet, nicht kopiert
+# COPY . . ist hier nicht nötig
+
+# Port für Vite Dev Server
+EXPOSE 3000
+
+# Vite Dev Server starten
+CMD ["npm", "run", "dev"]
+
+

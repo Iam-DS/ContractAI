@@ -1,0 +1,237 @@
+DIENSTLEISTUNGSVERTRAG
+IT-Services und Softwareentwicklung
+
+============================================================
+
+Vertragsnummer: DV-2024-001
+Datum: 04. Dezember 2024
+
+============================================================
+
+VERTRAGSPARTEIEN
+
+Auftraggeber:
+TechSolutions GmbH
+Musterstraße 42
+80331 München
+Vertreten durch: Dr. Thomas Müller (Geschäftsführer)
+USt-IdNr.: DE123456789
+
+- nachfolgend "Auftraggeber" genannt -
+
+Auftragnehmer:
+Digital Experts AG
+Innovationsweg 15
+10115 Berlin
+Vertreten durch: Sarah Schmidt (Vorstand)
+USt-IdNr.: DE987654321
+
+- nachfolgend "Auftragnehmer" genannt -
+
+============================================================
+
+§ 1 VERTRAGSGEGENSTAND
+
+(1) Der Auftragnehmer erbringt für den Auftraggeber IT-Dienstleistungen 
+    im Bereich Softwareentwicklung und Systemintegration.
+
+(2) Die Leistungen umfassen im Einzelnen:
+    a) Entwicklung einer webbasierten Kundenmanagement-Plattform
+    b) Integration bestehender ERP-Systeme (SAP S/4HANA)
+    c) Implementierung von REST-APIs für Drittanbieter
+    d) Schulung der Mitarbeiter (max. 20 Personen)
+    e) Technischer Support während der Einführungsphase
+
+(3) Die detaillierte Leistungsbeschreibung ergibt sich aus Anlage 1 
+    (Pflichtenheft) sowie Anlage 2 (Technische Spezifikation).
+
+============================================================
+
+§ 2 VERGÜTUNG
+
+(1) Die Gesamtvergütung für die vereinbarten Leistungen beträgt:
+
+    Netto:                    185.000,00 EUR
+    zzgl. 19% MwSt.:           35.150,00 EUR
+    ----------------------------------------
+    Brutto:                   220.150,00 EUR
+
+(2) Die Vergütung ist wie folgt zahlbar:
+    - 30% bei Vertragsunterzeichnung (55.545,00 EUR brutto)
+    - 40% nach Abnahme des Prototyps (88.060,00 EUR brutto)
+    - 30% nach Endabnahme (66.045,00 EUR brutto)
+
+(3) Zahlungen sind innerhalb von 14 Tagen nach Rechnungsstellung 
+    ohne Abzug fällig.
+
+(4) Zusätzliche Leistungen werden nach Aufwand berechnet:
+    - Senior Developer: 150,00 EUR/Stunde netto
+    - Junior Developer:  95,00 EUR/Stunde netto
+    - Projektmanagement: 130,00 EUR/Stunde netto
+
+============================================================
+
+§ 3 VERTRAGSLAUFZEIT
+
+(1) Dieser Vertrag beginnt am 01. Januar 2025.
+
+(2) Die Projektlaufzeit beträgt 12 Monate. 
+    Geplantes Projektende: 31. Dezember 2025.
+
+(3) Der Vertrag kann von beiden Parteien mit einer Frist von 
+    3 Monaten zum Monatsende gekündigt werden.
+
+(4) Das Recht zur außerordentlichen Kündigung aus wichtigem 
+    Grund bleibt unberührt.
+
+============================================================
+
+§ 4 LEISTUNGSERBRINGUNG
+
+(1) Die Leistungen werden am Sitz des Auftraggebers sowie remote 
+    erbracht. Der Auftragnehmer stellt hierfür qualifiziertes 
+    Personal zur Verfügung.
+
+(2) Der Auftraggeber stellt die erforderliche Infrastruktur 
+    (Arbeitsplätze, Zugänge, Testumgebungen) kostenfrei bereit.
+
+(3) Beide Parteien benennen jeweils einen Projektleiter als 
+    zentralen Ansprechpartner:
+    - Auftraggeber: Herr Michael Weber
+    - Auftragnehmer: Frau Lisa Hoffmann
+
+(4) Es finden wöchentliche Statusmeetings (jeden Dienstag, 10:00 Uhr) 
+    sowie monatliche Steering-Committee-Meetings statt.
+
+============================================================
+
+§ 5 ABNAHME
+
+(1) Die Abnahme erfolgt in zwei Phasen:
+    a) Teilabnahme des Prototyps bis 30. Juni 2025
+    b) Endabnahme des Gesamtsystems bis 31. Dezember 2025
+
+(2) Der Auftraggeber hat Mängel innerhalb von 14 Tagen nach 
+    Bereitstellung schriftlich zu rügen.
+
+(3) Unwesentliche Mängel berechtigen nicht zur Verweigerung 
+    der Abnahme.
+
+============================================================
+
+§ 6 GEWÄHRLEISTUNG
+
+(1) Der Auftragnehmer gewährleistet, dass die Software den 
+    vereinbarten Spezifikationen entspricht.
+
+(2) Die Gewährleistungsfrist beträgt 24 Monate ab Endabnahme.
+
+(3) Bei Mängeln hat der Auftragnehmer zunächst das Recht zur 
+    Nachbesserung. Die Nachbesserung hat innerhalb von 
+    10 Werktagen zu erfolgen.
+
+(4) Schlägt die Nachbesserung zweimal fehl, kann der 
+    Auftraggeber Minderung oder Rücktritt verlangen.
+
+============================================================
+
+§ 7 HAFTUNG
+
+(1) Die Haftung des Auftragnehmers für Schäden ist auf das 
+    Dreifache der Gesamtvergütung begrenzt, maximal jedoch 
+    auf 500.000,00 EUR.
+
+(2) Diese Haftungsbegrenzung gilt nicht bei:
+    - Vorsatz oder grober Fahrlässigkeit
+    - Verletzung von Leben, Körper oder Gesundheit
+    - Verletzung wesentlicher Vertragspflichten
+
+(3) Für mittelbare Schäden und entgangenen Gewinn haftet der 
+    Auftragnehmer nur bei Vorsatz oder grober Fahrlässigkeit.
+
+============================================================
+
+§ 8 GEHEIMHALTUNG UND DATENSCHUTZ
+
+(1) Beide Parteien verpflichten sich, alle im Rahmen dieses 
+    Vertrages erlangten vertraulichen Informationen geheim 
+    zu halten.
+
+(2) Diese Verpflichtung gilt auch nach Beendigung des Vertrages 
+    für einen Zeitraum von 5 Jahren.
+
+(3) Der Auftragnehmer verarbeitet personenbezogene Daten 
+    ausschließlich im Auftrag und nach Weisung des Auftraggebers 
+    gemäß Art. 28 DSGVO.
+
+(4) Eine separate Auftragsverarbeitungsvereinbarung (AVV) ist 
+    als Anlage 3 beigefügt.
+
+============================================================
+
+§ 9 NUTZUNGSRECHTE
+
+(1) Der Auftraggeber erhält mit vollständiger Zahlung ein 
+    ausschließliches, zeitlich und räumlich unbeschränktes 
+    Nutzungsrecht an den im Rahmen dieses Vertrages erstellten 
+    Arbeitsergebnissen.
+
+(2) Der Quellcode wird dem Auftraggeber vollständig übergeben 
+    und dokumentiert.
+
+(3) Vorbestehende Rechte des Auftragnehmers (Libraries, 
+    Frameworks) werden dem Auftraggeber als einfaches 
+    Nutzungsrecht eingeräumt.
+
+============================================================
+
+§ 10 SCHLUSSBESTIMMUNGEN
+
+(1) Änderungen und Ergänzungen dieses Vertrages bedürfen der 
+    Schriftform. Dies gilt auch für die Aufhebung dieses 
+    Schriftformerfordernisses.
+
+(2) Sollten einzelne Bestimmungen dieses Vertrages unwirksam 
+    sein oder werden, berührt dies die Wirksamkeit der übrigen 
+    Bestimmungen nicht.
+
+(3) Es gilt das Recht der Bundesrepublik Deutschland unter 
+    Ausschluss des UN-Kaufrechts.
+
+(4) Gerichtsstand für alle Streitigkeiten aus diesem Vertrag 
+    ist München.
+
+============================================================
+
+ANLAGEN
+
+Anlage 1: Pflichtenheft
+Anlage 2: Technische Spezifikation
+Anlage 3: Auftragsverarbeitungsvereinbarung (AVV)
+Anlage 4: Service Level Agreement (SLA)
+
+============================================================
+
+UNTERSCHRIFTEN
+
+
+München, den _______________
+
+
+_________________________________
+Dr. Thomas Müller
+Geschäftsführer TechSolutions GmbH
+(Auftraggeber)
+
+
+Berlin, den _______________
+
+
+_________________________________
+Sarah Schmidt
+Vorstand Digital Experts AG
+(Auftragnehmer)
+
+============================================================
+
+

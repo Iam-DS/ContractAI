@@ -1,0 +1,36 @@
+# Dependencies - werden im Container installiert
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Build Output
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment (lokal behalten, nicht in Image kopieren)
+.env
+.env.local
+.env.*.local
+
+# Docker Files (nicht im Image nötig)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+

@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    volumes:
+      # Projekt-Root mounten für Live-Code-Änderungen
+      - .:/app
+      # Anonymes Volume für node_modules - verhindert Überschreibung durch Host
+      - /app/node_modules
+    environment:
+      # Polling für Dateiänderungserkennung (wichtig für Docker auf macOS)
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      # Ollama Konfiguration - host.docker.internal für Zugriff auf Host-Ollama
+      - VITE_OLLAMA_URL=http://host.docker.internal:11434
+      - VITE_OLLAMA_MODEL=gpt-oss:120b
+    # Zugriff auf Host-Netzwerk für Ollama
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Neustart bei Fehlern
+    restart: unless-stopped
+    # Stdin offen halten für interaktive Nutzung
+    stdin_open: true
+    tty: true
+

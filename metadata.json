@@ -1,0 +1,5 @@
+{
+  "name": "ContractAI - Intelligentes Vertragsmanagement",
+  "description": "Eine KI-gestützte Plattform zur zentralen Speicherung, Analyse und Überwachung von Verträgen. Automatische Metadaten-Extraktion, Fristenkontrolle und Risikobewertung mittels Google Gemini.",
+  "requestFramePermissions": []
+}
