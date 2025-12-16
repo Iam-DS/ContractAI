@@ -1,4 +1,10 @@
-import { Contract, ContractStatus, RiskLevel } from "../types";
+import { 
+  Contract, 
+  ContractStatus, 
+  ContractType, 
+  ContractCategory,
+  CONTRACT_TYPE_TO_CATEGORY 
+} from "../types";
 
 // Ollama API Endpunkt - in Docker verwenden wir host.docker.internal
 const OLLAMA_BASE_URL = import.meta.env.VITE_OLLAMA_URL || "http://localhost:11434";
@@ -36,6 +42,75 @@ interface OllamaResponse {
   done: boolean;
 }
 
+// Alle erlaubten Vertragstypen als String-Liste für den Prompt
+const ALLOWED_CONTRACT_TYPES = Object.values(ContractType);
+
+// Validierung und Mapping des Vertragstyps
+const validateAndMapContractType = (rawType: string): ContractType => {
+  // Exakte Übereinstimmung prüfen
+  const exactMatch = ALLOWED_CONTRACT_TYPES.find(
+    t => t.toLowerCase() === rawType.toLowerCase()
+  );
+  if (exactMatch) return exactMatch;
+
+  // Fuzzy-Matching für häufige Varianten
+  const normalizedInput = rawType.toLowerCase().trim();
+  
+  // Mapping-Tabelle für Varianten
+  const variants: Record<string, ContractType> = {
+    'it-dienstleistung': ContractType.IT_VERTRAG,
+    'it dienstleistung': ContractType.IT_VERTRAG,
+    'it-dienstleistungsvertrag': ContractType.IT_VERTRAG,
+    'softwarevertrag': ContractType.IT_VERTRAG,
+    'lizenzvertrag': ContractType.IT_VERTRAG,
+    'dienstleistungsvertrag': ContractType.BERATUNGSVERTRAG,
+    'dienstvertrag': ContractType.BERATUNGSVERTRAG,
+    'servicevertrag': ContractType.WARTUNGSVERTRAG_BAU,
+    'service': ContractType.WARTUNGSVERTRAG_BAU,
+    'miete': ContractType.MIETVERTRAG,
+    'miet': ContractType.MIETVERTRAG,
+    'pacht': ContractType.PACHTVERTRAG,
+    'arbeit': ContractType.ARBEITSVERTRAG,
+    'anstellung': ContractType.ARBEITSVERTRAG,
+    'anstellungsvertrag': ContractType.ARBEITSVERTRAG,
+    'kauf': ContractType.KAUFVERTRAG,
+    'lieferung': ContractType.LIEFERVERTRAG,
+    'leasing': ContractType.LEASINGVERTRAG,
+    'versicherung': ContractType.VERSICHERUNGSVERTRAG,
+    'darlehen': ContractType.DARLEHENSVERTRAG,
+    'kredit': ContractType.DARLEHENSVERTRAG,
+    'kreditvertrag': ContractType.DARLEHENSVERTRAG,
+    'nda': ContractType.BERATUNGSVERTRAG,
+    'geheimhaltung': ContractType.BERATUNGSVERTRAG,
+    'geheimhaltungsvertrag': ContractType.BERATUNGSVERTRAG,
+    'werk': ContractType.WERKVERTRAG,
+    'bauvertrag': ContractType.VOB_B_VERTRAG,
+    'bau': ContractType.VOB_B_VERTRAG,
+    'vob': ContractType.VOB_B_VERTRAG,
+    'rahmen': ContractType.RAHMENVERTRAG,
+    'makler': ContractType.MAKLERVERTRAG,
+    'hausverwaltung': ContractType.HAUSVERWALTUNGSVERTRAG,
+    'hausmeister': ContractType.HAUSMEISTERVERTRAG,
+    'reinigung': ContractType.REINIGUNGSVERTRAG,
+    'gesellschaft': ContractType.GESELLSCHAFTSVERTRAG,
+    'gmbh': ContractType.GESELLSCHAFTSVERTRAG,
+    'wartung': ContractType.WARTUNGSVERTRAG_BAU,
+    'subunternehmer': ContractType.SUBUNTERNEHMERVERTRAG,
+    'beratung': ContractType.BERATUNGSVERTRAG,
+    'consulting': ContractType.BERATUNGSVERTRAG,
+  };
+
+  // Suche nach Teilübereinstimmung
+  for (const [variant, type] of Object.entries(variants)) {
+    if (normalizedInput.includes(variant)) {
+      return type;
+    }
+  }
+
+  // Fallback
+  return ContractType.SONSTIGER;
+};
+
 export const analyzeContractWithOllama = async (file: File): Promise<Partial<Contract>> => {
   // Für Text-Dateien den Inhalt direkt lesen
   let fileContent = "";
@@ -64,7 +139,7 @@ Das JSON muss folgende Struktur haben:
 {
   "title": "Kurzer beschreibender Titel des Vertrags",
   "partnerName": "Name des Vertragspartners (Firma/Person)",
-  "category": "Kategorie (z.B. Dienstleistung, Mietvertrag, NDA, Lizenz, Arbeitsvertrag)",
+  "contractType": "Einer der erlaubten Vertragstypen (siehe Liste unten)",
   "value": 0,
   "currency": "EUR",
   "startDate": "YYYY-MM-DD",
@@ -74,6 +149,47 @@ Das JSON muss folgende Struktur haben:
   "summary": "Kurze Zusammenfassung des Vertragsinhalts (max 2 Sätze)",
   "tags": ["tag1", "tag2"]
 }
+
+ERLAUBTE VERTRAGSTYPEN (wähle den passendsten):
+
+Kunden & Bauprojekte:
+- Werkvertrag (Herstellung eines Werkes)
+- Wartungsvertrag (Wartung/Instandhaltung für Kunden)
+- Rahmenvertrag (Langfristige Geschäftsbeziehung)
+- VOB/B-Vertrag (Bauverträge nach VOB)
+
+Personal & Dienstleister:
+- Arbeitsvertrag (Anstellung von Mitarbeitern)
+- Tarifvertrag (Kollektive Arbeitsbedingungen)
+- Subunternehmervertrag (Werk/Dienstleistung durch Subunternehmer)
+- Beratungsvertrag (Beratungsdienstleistungen)
+- IT-Vertrag (Software, IT-Dienstleistungen, Lizenzen)
+
+Lieferanten & Einkauf:
+- Kaufvertrag (Einmaliger Kauf von Waren)
+- Liefervertrag (Regelmäßige Lieferung von Waren)
+- Rahmenliefervertrag (Langfristiger Liefervertrag)
+- Leasingvertrag (Leasing von Gegenständen)
+- Mietvertrag Maschinen (Anmietung von Maschinen/Geräten)
+- Wartungsvertrag Fuhrpark (Wartung von Fahrzeugen)
+
+Immobilien:
+- Mietvertrag (Anmietung von Immobilien/Räumen)
+- Pachtvertrag (Pacht von Grundstücken/Betrieben)
+- Hausverwaltungsvertrag (Verwaltung von Immobilien)
+- Maklervertrag (Immobilienvermittlung)
+- Hausmeistervertrag (Hausmeisterservice)
+- Reinigungsvertrag (Gebäudereinigung)
+
+Finanzen & Versicherungen:
+- Darlehensvertrag (Kredite, Darlehen)
+- Kontovertrag (Bankkonten)
+- Bürgschaft (Bürgschaftsvereinbarungen)
+- Bankaval (Bankgarantien)
+- Versicherungsvertrag (Alle Arten von Versicherungen)
+- Gesellschaftsvertrag (GmbH, GbR, etc.)
+
+Falls kein Typ passt: "Sonstiger Vertrag"
 
 Regeln für riskLevel:
 - "Hoch": Mehrdeutige Klauseln, automatische Verlängerungen > 1 Jahr, unbegrenzte Haftung
@@ -124,6 +240,14 @@ JSON:`;
     // Versuche JSON zu parsen
     const extractedData = JSON.parse(jsonText);
     
+    // Vertragstyp validieren und mappen
+    const contractType = validateAndMapContractType(
+      extractedData.contractType || extractedData.category || 'Sonstiger Vertrag'
+    );
+    
+    // Hauptkategorie aus dem Vertragstyp ableiten
+    const category = CONTRACT_TYPE_TO_CATEGORY[contractType];
+    
     // Status basierend auf Daten ableiten
     let derivedStatus = ContractStatus.ACTIVE;
     const now = new Date();
@@ -139,7 +263,18 @@ JSON:`;
     }
 
     return {
-      ...extractedData,
+      title: extractedData.title,
+      partnerName: extractedData.partnerName,
+      category: category,
+      contractType: contractType,
+      value: extractedData.value || 0,
+      currency: extractedData.currency || 'EUR',
+      startDate: extractedData.startDate,
+      endDate: extractedData.endDate,
+      noticePeriod: extractedData.noticePeriod || 'Nicht angegeben',
+      riskLevel: extractedData.riskLevel,
+      summary: extractedData.summary,
+      tags: extractedData.tags || [],
       status: derivedStatus,
       fileName: file.name,
       uploadedAt: new Date().toISOString(),
@@ -153,5 +288,3 @@ JSON:`;
 
 // Export als Default für einfache Migration
 export const analyzeContract = analyzeContractWithOllama;
-
-

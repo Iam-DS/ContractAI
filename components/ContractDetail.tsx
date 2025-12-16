@@ -1,13 +1,25 @@
 import React from 'react';
-import { Contract, RiskLevel } from '../types';
-import { X, Calendar, DollarSign, Building, AlertTriangle, FileText, Tag, Clock, Download } from 'lucide-react';
+import { Contract, RiskLevel, ContractCategory, CATEGORY_COLORS } from '../types';
+import { X, Calendar, DollarSign, Building, AlertTriangle, FileText, Tag, Clock, Download, FolderTree, Building2, Users, Truck, Home, Wallet } from 'lucide-react';
 
 interface ContractDetailProps {
   contract: Contract;
   onClose: () => void;
 }
 
+// Icons für Kategorien
+const CATEGORY_ICONS: Record<ContractCategory, React.ReactNode> = {
+  [ContractCategory.KUNDEN_BAUPROJEKTE]: <Building2 size={22} />,
+  [ContractCategory.PERSONAL_DIENSTLEISTER]: <Users size={22} />,
+  [ContractCategory.LIEFERANTEN_EINKAUF]: <Truck size={22} />,
+  [ContractCategory.IMMOBILIEN]: <Home size={22} />,
+  [ContractCategory.FINANZEN_VERSICHERUNGEN]: <Wallet size={22} />
+};
+
 export const ContractDetail: React.FC<ContractDetailProps> = ({ contract, onClose }) => {
+  const categoryColor = CATEGORY_COLORS[contract.category] || '#64748b';
+  const categoryIcon = CATEGORY_ICONS[contract.category];
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-sm animate-in fade-in duration-300">
       <div className="bg-[#0b1120] rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto flex flex-col border border-slate-800 ring-1 ring-white/10 animate-in zoom-in-95 duration-300 relative">
@@ -20,6 +32,18 @@ export const ContractDetail: React.FC<ContractDetailProps> = ({ contract, onClos
             <div className="flex items-center space-x-3 mb-2">
                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700">
                  {contract.id}
+               </span>
+               {/* Kategorie Badge */}
+               <span 
+                 className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5"
+                 style={{ 
+                   backgroundColor: `${categoryColor}15`, 
+                   color: categoryColor,
+                   border: `1px solid ${categoryColor}30`
+                 }}
+               >
+                 {categoryIcon}
+                 {contract.category.split(' ')[0]}
                </span>
                {contract.riskLevel === RiskLevel.HIGH && (
                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-500/10 text-red-500 border border-red-500/20">
@@ -84,11 +108,41 @@ export const ContractDetail: React.FC<ContractDetailProps> = ({ contract, onClos
                    </div>
                 </div>
                 <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-start space-x-4 hover:border-slate-700 transition-colors group">
-                   <div className="p-3 bg-orange-500/10 text-orange-400 rounded-xl group-hover:bg-orange-500/20 transition-colors"><Tag size={22}/></div>
-                   <div>
-                    <p className="text-xs text-slate-500 uppercase font-bold tracking-wide">Kategorie</p>
-                    <p className="font-semibold text-slate-200 mt-1 text-lg">{contract.category}</p>
+                   <div 
+                     className="p-3 rounded-xl transition-colors"
+                     style={{ backgroundColor: `${categoryColor}15`, color: categoryColor }}
+                   >
+                     <FolderTree size={22}/>
                    </div>
+                   <div>
+                    <p className="text-xs text-slate-500 uppercase font-bold tracking-wide">Vertragstyp</p>
+                    <p className="font-semibold text-slate-200 mt-1 text-lg">{contract.contractType}</p>
+                   </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Klassifikation Sektion */}
+            <section>
+              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Klassifikation</h3>
+              <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <div className="flex items-center gap-4">
+                  <div 
+                    className="p-4 rounded-2xl"
+                    style={{ backgroundColor: `${categoryColor}15`, color: categoryColor }}
+                  >
+                    {categoryIcon}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-xs text-slate-500 uppercase font-bold tracking-wide mb-1">Hauptkategorie</p>
+                    <p className="font-semibold text-lg" style={{ color: categoryColor }}>{contract.category}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-slate-500 uppercase font-bold tracking-wide mb-1">Typ</p>
+                    <span className="px-3 py-1.5 bg-slate-800 rounded-lg text-sm font-medium text-slate-300 border border-slate-700">
+                      {contract.contractType}
+                    </span>
+                  </div>
                 </div>
               </div>
             </section>

@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
-import { Contract, ContractStatus, RiskLevel } from '../types';
-import { Search, Filter, Eye, AlertTriangle, CheckCircle, Clock, ChevronRight } from 'lucide-react';
+import { Contract, ContractStatus, RiskLevel, ContractCategory, ContractType, CATEGORY_COLORS } from '../types';
+import { Search, Filter, AlertTriangle, CheckCircle, Clock, ChevronRight, Building2, Users, Truck, Home, Wallet } from 'lucide-react';
 
 interface ContractListProps {
   contracts: Contract[];
   onViewDetails: (contract: Contract) => void;
 }
 
+// Icons für Kategorien
+const CATEGORY_ICONS: Record<ContractCategory, React.ReactNode> = {
+  [ContractCategory.KUNDEN_BAUPROJEKTE]: <Building2 size={14} />,
+  [ContractCategory.PERSONAL_DIENSTLEISTER]: <Users size={14} />,
+  [ContractCategory.LIEFERANTEN_EINKAUF]: <Truck size={14} />,
+  [ContractCategory.IMMOBILIEN]: <Home size={14} />,
+  [ContractCategory.FINANZEN_VERSICHERUNGEN]: <Wallet size={14} />
+};
+
 export const ContractList: React.FC<ContractListProps> = ({ contracts, onViewDetails }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [riskFilter, setRiskFilter] = useState<string>('all');
+  const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [typeFilter, setTypeFilter] = useState<string>('all');
+
+  // Verfügbare Vertragstypen basierend auf der ausgewählten Kategorie
+  const availableTypes = categoryFilter === 'all' 
+    ? Object.values(ContractType)
+    : contracts
+        .filter(c => c.category === categoryFilter)
+        .map(c => c.contractType)
+        .filter((value, index, self) => self.indexOf(value) === index);
 
   const filteredContracts = contracts.filter(contract => {
     const matchesSearch = 
@@ -19,8 +38,10 @@ export const ContractList: React.FC<ContractListProps> = ({ contracts, onViewDet
     
     const matchesStatus = statusFilter === 'all' || contract.status === statusFilter;
     const matchesRisk = riskFilter === 'all' || contract.riskLevel === riskFilter;
+    const matchesCategory = categoryFilter === 'all' || contract.category === categoryFilter;
+    const matchesType = typeFilter === 'all' || contract.contractType === typeFilter;
 
-    return matchesSearch && matchesStatus && matchesRisk;
+    return matchesSearch && matchesStatus && matchesRisk && matchesCategory && matchesType;
   });
 
   const getStatusBadge = (status: ContractStatus) => {
@@ -46,6 +67,34 @@ export const ContractList: React.FC<ContractListProps> = ({ contracts, onViewDet
     return <span className={`px-2.5 py-1 rounded-lg text-xs font-semibold border ${colors[risk]}`}>{risk}</span>;
   };
 
+  const getCategoryBadge = (category: ContractCategory, contractType: ContractType) => {
+    const color = CATEGORY_COLORS[category] || '#64748b';
+    const icon = CATEGORY_ICONS[category];
+    
+    return (
+      <div className="flex flex-col gap-1">
+        <span 
+          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium"
+          style={{ backgroundColor: `${color}15`, color: color, border: `1px solid ${color}30` }}
+        >
+          {icon}
+          <span className="truncate max-w-[100px]" title={category}>
+            {category.split(' ')[0]}
+          </span>
+        </span>
+        <span className="text-[10px] text-slate-500 truncate max-w-[120px]" title={contractType}>
+          {contractType}
+        </span>
+      </div>
+    );
+  };
+
+  // Reset Typ-Filter wenn Kategorie geändert wird
+  const handleCategoryChange = (value: string) => {
+    setCategoryFilter(value);
+    setTypeFilter('all');
+  };
+
   return (
     <div className="bg-slate-900/60 backdrop-blur-xl rounded-3xl border border-white/5 shadow-2xl overflow-hidden flex flex-col h-[calc(100vh-160px)] animate-in fade-in duration-500">
       {/* Header & Filter Bar */}
@@ -54,6 +103,9 @@ export const ContractList: React.FC<ContractListProps> = ({ contracts, onViewDet
           <div className="flex items-center space-x-3">
              <div className="h-8 w-1.5 bg-blue-500 rounded-full"></div>
              <h2 className="text-xl font-bold text-white">Vertragsdatenbank</h2>
+             <span className="text-xs text-slate-500 bg-slate-800 px-2 py-1 rounded-full">
+               {filteredContracts.length} von {contracts.length}
+             </span>
           </div>
           <div className="relative group">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 group-hover:text-blue-400 transition-colors" size={18} />
@@ -72,6 +124,26 @@ export const ContractList: React.FC<ContractListProps> = ({ contracts, onViewDet
             <Filter size={14} className="text-slate-400" />
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Filter</span>
           </div>
+          
+          {/* Hauptkategorie Filter */}
+          <select 
+            className="text-sm bg-slate-950/50 border border-slate-700 text-slate-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/20 px-3 py-1.5 outline-none hover:bg-slate-800 transition-colors cursor-pointer"
+            value={categoryFilter}
+            onChange={(e) => handleCategoryChange(e.target.value)}
+          >
+            <option value="all">Alle Kategorien</option>
+            {Object.values(ContractCategory).map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+
+          {/* Vertragstyp Filter */}
+          <select 
+            className="text-sm bg-slate-950/50 border border-slate-700 text-slate-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/20 px-3 py-1.5 outline-none hover:bg-slate-800 transition-colors cursor-pointer"
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value)}
+          >
+            <option value="all">Alle Typen</option>
+            {availableTypes.map(t => <option key={t} value={t}>{t}</option>)}
+          </select>
           
           <select 
             className="text-sm bg-slate-950/50 border border-slate-700 text-slate-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/20 px-3 py-1.5 outline-none hover:bg-slate-800 transition-colors cursor-pointer"
@@ -99,7 +171,7 @@ export const ContractList: React.FC<ContractListProps> = ({ contracts, onViewDet
           <thead className="bg-slate-950/80 sticky top-0 z-10 backdrop-blur-md">
             <tr>
               <th scope="col" className="px-6 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Titel / Partner</th>
-              <th scope="col" className="px-6 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Kategorie</th>
+              <th scope="col" className="px-6 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Kategorie / Typ</th>
               <th scope="col" className="px-6 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
               <th scope="col" className="px-6 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Wert</th>
               <th scope="col" className="px-6 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Risiko</th>
@@ -117,7 +189,7 @@ export const ContractList: React.FC<ContractListProps> = ({ contracts, onViewDet
                   </div>
                 </td>
                 <td className="px-6 py-5 whitespace-nowrap">
-                  <span className="text-xs font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">{contract.category}</span>
+                  {getCategoryBadge(contract.category, contract.contractType)}
                 </td>
                 <td className="px-6 py-5 whitespace-nowrap">
                   {getStatusBadge(contract.status)}

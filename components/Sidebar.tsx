@@ -1,12 +1,40 @@
 import React from 'react';
-import { LayoutDashboard, FileText, PlusCircle, Settings, Shield, Hexagon } from 'lucide-react';
+import { LayoutDashboard, FileText, PlusCircle, Settings, Shield, Hexagon, Building2, Users, Truck, Home, Wallet } from 'lucide-react';
+import { ContractCategory, CATEGORY_COLORS, Contract } from '../types';
 
 interface SidebarProps {
   currentView: string;
   onChangeView: (view: string) => void;
+  contracts?: Contract[];
+  onCategoryFilter?: (category: ContractCategory | null) => void;
+  selectedCategory?: ContractCategory | null;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) => {
+// Icons für Kategorien
+const CATEGORY_ICONS: Record<ContractCategory, React.ElementType> = {
+  [ContractCategory.KUNDEN_BAUPROJEKTE]: Building2,
+  [ContractCategory.PERSONAL_DIENSTLEISTER]: Users,
+  [ContractCategory.LIEFERANTEN_EINKAUF]: Truck,
+  [ContractCategory.IMMOBILIEN]: Home,
+  [ContractCategory.FINANZEN_VERSICHERUNGEN]: Wallet
+};
+
+// Kurzbezeichnungen für die Sidebar
+const CATEGORY_SHORT_NAMES: Record<ContractCategory, string> = {
+  [ContractCategory.KUNDEN_BAUPROJEKTE]: 'Kunden & Bau',
+  [ContractCategory.PERSONAL_DIENSTLEISTER]: 'Personal',
+  [ContractCategory.LIEFERANTEN_EINKAUF]: 'Lieferanten',
+  [ContractCategory.IMMOBILIEN]: 'Immobilien',
+  [ContractCategory.FINANZEN_VERSICHERUNGEN]: 'Finanzen'
+};
+
+export const Sidebar: React.FC<SidebarProps> = ({ 
+  currentView, 
+  onChangeView, 
+  contracts = [],
+  onCategoryFilter,
+  selectedCategory 
+}) => {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'contracts', label: 'Verträge', icon: FileText },
@@ -17,6 +45,25 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) =
     { id: 'compliance', label: 'Compliance & Risiko', icon: Shield },
     { id: 'settings', label: 'Einstellungen', icon: Settings },
   ];
+
+  // Zähler für jede Kategorie berechnen
+  const categoryCounts = Object.values(ContractCategory).reduce((acc, cat) => {
+    acc[cat] = contracts.filter(c => c.category === cat).length;
+    return acc;
+  }, {} as Record<ContractCategory, number>);
+
+  const handleCategoryClick = (category: ContractCategory) => {
+    if (onCategoryFilter) {
+      // Toggle: Wenn dieselbe Kategorie geklickt wird, Filter aufheben
+      if (selectedCategory === category) {
+        onCategoryFilter(null);
+      } else {
+        onCategoryFilter(category);
+        // Zur Vertragsliste wechseln
+        onChangeView('contracts');
+      }
+    }
+  };
 
   return (
     <div className="w-72 bg-slate-950/80 backdrop-blur-2xl border-r border-white/5 text-slate-300 flex flex-col h-full shrink-0 relative overflow-hidden z-30">
@@ -59,7 +106,52 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) =
           );
         })}
 
-        <div className="mt-10 text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 px-4">System</div>
+        {/* Kategorien Sektion */}
+        <div className="mt-8 text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 px-4">Kategorien</div>
+        <div className="space-y-1">
+          {Object.values(ContractCategory).map((category) => {
+            const Icon = CATEGORY_ICONS[category];
+            const count = categoryCounts[category];
+            const color = CATEGORY_COLORS[category];
+            const isSelected = selectedCategory === category;
+            
+            return (
+              <button
+                key={category}
+                onClick={() => handleCategoryClick(category)}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl transition-all duration-200 group ${
+                  isSelected 
+                    ? 'bg-white/10 text-white' 
+                    : 'hover:bg-white/5 text-slate-400 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center space-x-3">
+                  <div 
+                    className="p-1.5 rounded-lg transition-all"
+                    style={{ 
+                      backgroundColor: isSelected ? `${color}30` : `${color}15`,
+                      color: color 
+                    }}
+                  >
+                    <Icon size={16} />
+                  </div>
+                  <span className="text-sm font-medium">{CATEGORY_SHORT_NAMES[category]}</span>
+                </div>
+                <span 
+                  className={`text-xs font-bold px-2 py-0.5 rounded-full transition-all ${
+                    isSelected 
+                      ? 'bg-white/20 text-white' 
+                      : 'bg-slate-800 text-slate-500 group-hover:bg-slate-700 group-hover:text-slate-300'
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 px-4">System</div>
         {bottomItems.map((item) => {
            const Icon = item.icon;
            return (
